@@ -5,9 +5,10 @@
 #include "HumanPlayer.h"
 #include <iostream>
 
-HumanPlayer::HumanPlayer(std::string name)
-    : Player(std::move(name))
-{}
+HumanPlayer::HumanPlayer( std::string name )
+        : Player( std::move( name ) )
+{
+}
 
 const char HumanPlayer::getPlayerInput()
 {
@@ -16,8 +17,7 @@ const char HumanPlayer::getPlayerInput()
     do
     {
         std::cin >> input;
-    }
-    while (acceptedInput.find(input) == acceptedInput.end());
+    } while ( acceptedInput.find( input ) == acceptedInput.end() );
 
     return input;
 }

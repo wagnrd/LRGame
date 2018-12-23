@@ -4,20 +4,21 @@
 
 #include "AIPlayer.h"
 #include <random>
-#include <string_view>
 #include <iostream>
 
-AIPlayer::AIPlayer(std::string name, int n)
-    : Player(std::move(name)), n(n)
-{}
-
-void AIPlayer::learnFromPreviousGames(const std::string_view &playerInputHistory)
+AIPlayer::AIPlayer( std::string name, int n )
+        : Player( std::move( name ) ), n( n )
 {
-    std::string previousGameNGramm = static_cast<std::string>(playerInputHistory.substr( playerInputHistory.size() - n, playerInputHistory.size()));
+}
 
-    if ( nGrammMap.find(previousGameNGramm) != nGrammMap.end())
+void AIPlayer::learnFromPreviousGames( const std::string_view& playerInputHistory )
+{
+    std::string previousGameNGramm = static_cast<std::string>( playerInputHistory.substr( playerInputHistory.size() - n,
+                                                                                          playerInputHistory.size() ));
+
+    if ( nGrammMap.find( previousGameNGramm ) != nGrammMap.end() )
     {
-        int previousGameNGrammValue = nGrammMap.at(previousGameNGramm);
+        int previousGameNGrammValue = nGrammMap.at( previousGameNGramm );
         nGrammMap[previousGameNGramm] = ++previousGameNGrammValue;
     }
     else
@@ -26,16 +27,17 @@ void AIPlayer::learnFromPreviousGames(const std::string_view &playerInputHistory
     }
 }
 
-std::string AIPlayer::getNGrammWithoutGuess(const std::string_view& playerInputHistory) const
+std::string AIPlayer::getNGrammWithoutGuess( const std::string_view& playerInputHistory ) const
 {
-    return static_cast<std::string>(playerInputHistory.substr( playerInputHistory.size() - ( n - 1), playerInputHistory.size()));
+    return static_cast<std::string>(playerInputHistory.substr( playerInputHistory.size() - ( n - 1 ),
+                                                               playerInputHistory.size() ));
 }
 
 const char AIPlayer::getRandomLR() const
 {
     std::mt19937_64 rng;
-    rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937_64::result_type> dist2(1, 2);
+    rng.seed( std::random_device()() );
+    std::uniform_int_distribution<std::mt19937_64::result_type> dist2( 1, 2 );
 
-    return dist2(rng) == 1 ? 'R' : 'L';
+    return dist2( rng ) == 1 ? 'R' : 'L';
 }

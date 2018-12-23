@@ -14,16 +14,20 @@ protected:
     std::string name;
 
 public:
-    explicit Player(std::string name) : name(std::move(name)) {};
     virtual ~Player() = default;
     virtual const char getPlayerInput() = 0;
+
+    explicit Player( std::string name )
+            : name( std::move( name ) )
+    {
+    }
 
     std::string_view getName()
     {
         return name;
     }
 
-    void setGame(Game* game)
+    void setGame( Game* game )
     {
         this->game = game;
     }

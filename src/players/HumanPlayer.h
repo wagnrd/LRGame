@@ -9,12 +9,11 @@
 #include <set>
 
 class HumanPlayer : public Player {
-    std::set<char> acceptedInput = {'L', 'R', 'q'};
+    std::set<char> acceptedInput = { 'L', 'R', 'q' };
 
 public:
-    explicit HumanPlayer(std::string name);
+    explicit HumanPlayer( std::string name );
     const char getPlayerInput() override;
 };
-
 
 #endif //LRGAME_HUMANPLAYER_H
